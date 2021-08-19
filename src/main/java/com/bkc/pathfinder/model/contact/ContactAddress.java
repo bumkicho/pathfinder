@@ -1,6 +1,10 @@
 package com.bkc.pathfinder.model.contact;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import lombok.Data;
 
 @Data
@@ -9,9 +13,14 @@ import lombok.Data;
 public class ContactAddress {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="address_id")
-	private Long id;
+	@GeneratedValue(generator = "simple-generator")
+	@GenericGenerator(name = "simple-generator", parameters = @Parameter(name = "prefix", value = "address"), strategy = "com.bkc.pathfinder.model.common.SimpleIDGenerator")
+	@Column(name = "address_id", unique = true, nullable = false, length = 20)
+	private String addressId;
+	
+	@ManyToOne
+	@JoinColumn(name="contact_id")
+	Contact contact;
 	
 	@Column(name="address_line_1")
 	private String addressLine1;

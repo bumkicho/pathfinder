@@ -23,8 +23,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByUserId(String userId);
 	Optional<User> findByUserName(String userName);
 	
+	/*
+	 * NOTE: @Query uses jpql meaning it uses Class name and Property name
+	 */
 	@Modifying
-	@Query("update bkc_user set user_name=:userName where user_id=:userId")
+	@Query("update User set userName=:userName where userId=:userId")
 	void updateUserName(@Param("userId") String userId, @Param("userName") String userName);
 	
 	Optional<List<UserRole>> findRoleByUserId(@Param("userId") String userId);
