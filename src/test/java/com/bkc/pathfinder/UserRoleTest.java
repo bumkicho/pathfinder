@@ -24,7 +24,6 @@ public class UserRoleTest {
 	@Test
 	public void save_user_test() {
 		User user = new User();
-		user.setUserId("bcho");
 		user.setUserPassword("SalesPage01");
 		user.setUserName("BumKi Cho");
 		/* 
@@ -32,6 +31,14 @@ public class UserRoleTest {
 		 * userService = new UserService();
 		 */
 		userService.saveUser(user);
+		
+		Role role = new Role();
+		role.setRoleName("Admin");
+		role.setDescription("Administrator can handle admin tasks.");
+		
+		userService.saveRole(role);
+		
+		userService.saveUserRole(user, role);
 		
 	}
 

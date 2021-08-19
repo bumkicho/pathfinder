@@ -30,7 +30,7 @@ public class ActivityType {
 	
 	@Id
 	@GeneratedValue(generator = "simple-generator")
-	@GenericGenerator(name = "simple-generator", parameters = @Parameter(name = "prefix", value = "activityType"), strategy = "com.bkc.pathfinder.model.common.SimpleIDGenerator")
+	@GenericGenerator(name = "simple-generator", parameters = @Parameter(name = "prefix", value = "activityType"), strategy = "com.bkc.pathfinder.common.SimpleIDGenerator")
 	@Column(name = "activity_type_id", unique = true, nullable = false, length = 20)
 	private String activityTypeId;
 	

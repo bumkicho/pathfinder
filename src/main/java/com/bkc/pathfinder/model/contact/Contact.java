@@ -23,7 +23,7 @@ public class Contact {
 	
 	@Id
 	@GeneratedValue(generator = "simple-generator")
-	@GenericGenerator(name = "simple-generator", parameters = @Parameter(name = "prefix", value = "contact"), strategy = "com.bkc.pathfinder.model.common.SimpleIDGenerator")
+	@GenericGenerator(name = "simple-generator", parameters = @Parameter(name = "prefix", value = "contact"), strategy = "com.bkc.pathfinder.common.SimpleIDGenerator")
 	@Column(name = "contact_id", unique = true, nullable = false, length = 20)
 	private String contactId;
 	

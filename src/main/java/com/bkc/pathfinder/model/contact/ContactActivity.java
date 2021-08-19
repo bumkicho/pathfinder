@@ -24,7 +24,7 @@ public class ContactActivity {
 	
 	@Id
 	@GeneratedValue(generator = "simple-generator")
-	@GenericGenerator(name = "simple-generator", parameters = @Parameter(name = "prefix", value = "cntact"), strategy = "com.bkc.pathfinder.model.common.SimpleIDGenerator")
+	@GenericGenerator(name = "simple-generator", parameters = @Parameter(name = "prefix", value = "cntact"), strategy = "com.bkc.pathfinder.common.SimpleIDGenerator")
 	@Column(name = "contact_activity_id", length = 20)
 	private String contactActivityId;
 	

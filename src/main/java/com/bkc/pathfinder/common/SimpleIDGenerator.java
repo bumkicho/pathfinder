@@ -1,4 +1,4 @@
-package com.bkc.pathfinder.model.common;
+package com.bkc.pathfinder.common;
 
 import java.io.Serializable;
 import java.util.Properties;

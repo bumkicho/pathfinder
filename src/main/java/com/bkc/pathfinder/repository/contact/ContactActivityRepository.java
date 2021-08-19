@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.bkc.pathfinder.model.activity.Activity;
 import com.bkc.pathfinder.model.contact.Contact;
 import com.bkc.pathfinder.model.contact.ContactActivity;
+import com.bkc.pathfinder.projection.ContactActivityProjection;
 
 /**
  * 
@@ -19,7 +20,9 @@ import com.bkc.pathfinder.model.contact.ContactActivity;
 
 @Repository
 public interface ContactActivityRepository extends JpaRepository<ContactActivity, String> {
+	
+	Optional<List<ContactActivity>> findAllByContact(@Param("contact") Contact contact);
 
-	// TODO: figure out how to find all contact activities
-	Optional<List<Activity>> findAllByContact(@Param("contact") Contact contact);
+	Optional<List<ContactActivity>> findAllByActivity(@Param("activity") Activity activity);
+
 }

@@ -1,4 +1,4 @@
-package com.bkc.pathfinder.repository.activity.projection;
+package com.bkc.pathfinder.projection;
 
 import java.time.LocalDateTime;
 

@@ -33,7 +33,7 @@ public class UserRole {
 
 	@Id
 	@GeneratedValue(generator = "simple-generator")
-	@GenericGenerator(name = "simple-generator", parameters = @Parameter(name = "prefix", value = "userrole"), strategy = "com.bkc.pathfinder.model.common.SimpleIDGenerator")
+	@GenericGenerator(name = "simple-generator", parameters = @Parameter(name = "prefix", value = "userrole"), strategy = "com.bkc.pathfinder.common.SimpleIDGenerator")
 	@Column(name = "user_role_id", length = 20)
 	private String userRoleId;
 

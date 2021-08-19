@@ -4,7 +4,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.bkc.pathfinder.model.user.Role;
 import com.bkc.pathfinder.model.user.User;
+import com.bkc.pathfinder.model.user.UserRole;
 
 /**
  * 
@@ -17,7 +19,9 @@ import com.bkc.pathfinder.model.user.User;
 public interface UserServiceInterface {
 
 	User saveUser(User user);
+	Role saveRole(Role role);
 
 	Optional<User> findByUserName(String userName);
+	UserRole saveUserRole(User user, Role role);
 
 }
