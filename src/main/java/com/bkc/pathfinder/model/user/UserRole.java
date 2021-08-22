@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 
@@ -18,6 +19,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "app_user_role")
+//@EqualsAndHashCode(exclude = "{user, role}")
 public class UserRole {
 	/*
 	 * below is composite key approach not sure if I like it

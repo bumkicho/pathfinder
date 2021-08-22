@@ -3,11 +3,13 @@ package com.bkc.pathfinder.service.user;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.*;
 
-import com.bkc.pathfinder.model.authorization.PasswordEncoder;
+import com.bkc.pathfinder.config.security.PFPasswordEncoder;
 import com.bkc.pathfinder.model.user.Role;
 import com.bkc.pathfinder.model.user.User;
 import com.bkc.pathfinder.model.user.UserRole;
@@ -34,12 +36,16 @@ public class UserService implements UserServiceInterface {
 	private UserRoleRepository userRoleRepository;
 	
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private PFPasswordEncoder passwordEncoder;
 	
+	/*
+	 * SAVE OPERATIONS
+	 */
 	@Override
 	public User saveUser(User user) {
 		user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
 		user.setCreatedDt(LocalDateTime.now());
+		user.setActive(true);
 		
 		return userRepository.save(user);
 	}
@@ -50,17 +56,41 @@ public class UserService implements UserServiceInterface {
 	}
 
 	@Override
-	public Optional<User> findByUserName(String userName) {
-		return userRepository.findByUserName(userName);
-	}
-
-	@Override
 	public UserRole saveUserRole(User user, Role role) {
 		UserRole userRole = new UserRole();
 		userRole.setUser(user);
 		userRole.setRole(role);
 		userRole.setCreatedDt(LocalDateTime.now());
 		return userRoleRepository.save(userRole);		
+	}
+
+	/*
+	 * FIND USER
+	 */
+	@Override
+	public User findByUserName(String userName) {
+		return userRepository.findByUserName(userName);
+	}
+	
+	public User findByUserIdAndPassword(String userId, String password) {
+		return userRepository.findByUserIdAndPassword(userId, password);
+	}
+	
+	/*
+	 * FIND ROLE
+	 */
+	@Override
+	public List<Role> getRolesByUser(User user) {
+		List<UserRole> userRoles = userRoleRepository.findAllByUser(user);
+		List<Role> roles = new ArrayList<Role>();
+		//userRoles.stream().forEach(ur -> roles.add(ur.getRole()));
+		if(!userRoles.isEmpty()) {
+			for(UserRole userRole : userRoles) {
+				roles.add(userRole.getRole());
+			}
+		}
+		
+		return roles;
 	}
 
 }

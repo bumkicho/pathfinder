@@ -9,3 +9,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+app:
+  jwt:
+    secret: TrustGodWithAllYourHeart
+    expiraton-in-ms: 86400000

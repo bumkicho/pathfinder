@@ -1,13 +1,13 @@
-package com.bkc.pathfinder.model.authorization;
+package com.bkc.pathfinder.config.security;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PasswordEncoder extends BCryptPasswordEncoder {
+public class PFPasswordEncoder extends BCryptPasswordEncoder {
 
-	public PasswordEncoder() {
+	public PFPasswordEncoder() {
 		super();
-	}	
+	}
 
 }

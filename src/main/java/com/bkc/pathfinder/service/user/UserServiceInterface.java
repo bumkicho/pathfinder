@@ -1,5 +1,6 @@
 package com.bkc.pathfinder.service.user;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -21,7 +22,8 @@ public interface UserServiceInterface {
 	User saveUser(User user);
 	Role saveRole(Role role);
 
-	Optional<User> findByUserName(String userName);
+	User findByUserName(String userName);
 	UserRole saveUserRole(User user, Role role);
+	List<Role> getRolesByUser(User user);
 
 }

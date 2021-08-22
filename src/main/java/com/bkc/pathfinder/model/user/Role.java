@@ -32,11 +32,4 @@ public class Role {
 	@Column(name="description", nullable=false, length=200)
 	private String description;
 
-	/*
-	 * @ManyToMany(mappedBy="roles") 
-	 * private Set<User> users;
-	 */
-	
-	@OneToMany(mappedBy="role")
-	private Set<UserRole> userRoles;
 }

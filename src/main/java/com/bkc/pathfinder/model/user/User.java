@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 
@@ -18,7 +19,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "app_user") // user is reserved in postgresql
+@Table(name = "app_user") // user is reserved in postgresql. we need a different user table name.
 public class User {
 
 	@Id
@@ -32,20 +33,22 @@ public class User {
 
 	@Column(name = "user_password", nullable = false, length = 100)
 	private String userPassword;
+	
+	@Column(name = "user_email", nullable = false, length = 200)
+	private String userEmail;
 
 	@Column(name = "created_dt", nullable = false)
 	private LocalDateTime createdDt;
+	
+	@Column(name = "is_active", nullable = false)
+	private Boolean active;
+	
+	public boolean isActive() {
+		return this.active;
+	}
 
-	/*
-	 * 
-	 * no reason for many to many with introduction of UserRole class
-	 * 
-	 * @ManyToMany
-	 * 
-	 * @JoinTable(name="app_user_role", joinColumns=@JoinColumn(name="user_id"),
-	 * inverseJoinColumns=@JoinColumn(name="role_id") ) private Set<Role> roles;
-	 */
-
-	@OneToMany(mappedBy = "user")
-	private Set<UserRole> userRoles;
+	// This is to hold JwtToken with User instance.
+	// Transient will not be added to DB
+	@Transient
+	private String token;
 }
