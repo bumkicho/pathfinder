@@ -26,10 +26,15 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * 
  * It will be intercepting requests before UsernamePasswordAuthenticationFilter is called
  */
-public class JwtAuthorizationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	
 	@Autowired
 	private JwtProviderInterface jwtProviderInterface;
+	
+	@Override
+	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+		return request.getRequestURI().startsWith("/api/internal");
+	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -39,7 +44,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 		if(auth!=null && jwtProviderInterface.validateToken(request)) {
 			SecurityContextHolder.getContext().setAuthentication(auth);
 		}
-		filterChain.doFilter(request, response);		
+		filterChain.doFilter(request, response);
 	}
 
 }

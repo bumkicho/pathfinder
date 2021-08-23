@@ -1,6 +1,7 @@
 package com.bkc.pathfinder.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,7 +17,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.bkc.pathfinder.config.security.PFUserDetailsService;
-import com.bkc.pathfinder.config.security.jwt.JwtAuthorizationFilter;
+import com.bkc.pathfinder.config.security.internal.InternalAuthenticationFilter;
+import com.bkc.pathfinder.config.security.jwt.JwtAuthenticationFilter;
 import com.bkc.pathfinder.config.security.PFPasswordEncoder;
 
 /**
@@ -40,6 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private PFUserDetailsService pfUserDetailsService;
+	
+	@Value("${app.jwt.internalAccessKey}")
+	private String accessKey;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -54,13 +59,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //app will not create session. every request will need to be authenticated. using JWT makes it okay?
 
 		http.authorizeRequests()
+	        .antMatchers("/api/internal/**").hasAnyRole("SYSADMIN")
+	        .antMatchers("/api/crm/**").hasAnyRole("USER, ADMIN")
 	        .antMatchers("/api/authentication/**").permitAll()
+	        .antMatchers("/**").permitAll()
 	        .anyRequest().authenticated();
 
 //		http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN").antMatchers("/user").hasAnyRole("ADMIN", "USER")
 //				.antMatchers("/").permitAll().and().formLogin();
 		
-		http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+			.addFilterBefore(internalAuthenticationFilter(), JwtAuthenticationFilter.class);
 	}
 
 	@Override
@@ -80,8 +89,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public JwtAuthorizationFilter jwtAuthorizationFilter() {
-		return new JwtAuthorizationFilter();
+	public JwtAuthenticationFilter jwtAuthenticationFilter() {
+		return new JwtAuthenticationFilter();
+	}
+	
+	@Bean
+	public InternalAuthenticationFilter internalAuthenticationFilter() {
+		return new InternalAuthenticationFilter(accessKey);
 	}
 
 }

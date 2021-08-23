@@ -14,3 +14,4 @@ app:
   jwt:
     secret: TrustGodWithAllYourHeart
     expiraton-in-ms: 86400000
+    internalAccessKey: NoWorriesConcerns

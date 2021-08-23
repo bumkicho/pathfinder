@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -61,7 +62,7 @@ public class JwtProvider implements JwtProviderInterface {
 	@Override
     public Authentication getAuthentication(HttpServletRequest request)
     {
-        Claims claims = extractClaims(request);
+        Claims claims = getSecurityUtilities().extractClaims(request);
 
         if (claims == null)
         {
@@ -91,7 +92,7 @@ public class JwtProvider implements JwtProviderInterface {
 	@Override
     public boolean validateToken(HttpServletRequest request)
     {
-        Claims claims = extractClaims(request);
+        Claims claims = getSecurityUtilities().extractClaims(request);
 
         if (claims == null)
         {
@@ -104,20 +105,18 @@ public class JwtProvider implements JwtProviderInterface {
         }
         return true;
     }
-
-    private Claims extractClaims(HttpServletRequest request)
-    {
-        String token = SecurityUtilities.extractAuthTokenFromRequest(request);
-
-        if (token == null)
-        {
-            return null;
-        }
-
-        return Jwts.parser()
-                .setSigningKey(JWT_SECRET)
-                .parseClaimsJws(token)
-                .getBody();
-    }
-
+	
+	@Bean
+	private SecurityUtilities getSecurityUtilities() {
+		return new SecurityUtilities(JWT_SECRET);
+	}
+	/*
+	 * public Claims extractClaims(HttpServletRequest request) { String token =
+	 * SecurityUtilities.extractAuthTokenFromRequest(request);
+	 * 
+	 * if (token == null) { return null; }
+	 * 
+	 * return Jwts.parser() .setSigningKey(JWT_SECRET) .parseClaimsJws(token)
+	 * .getBody(); }
+	 */
 }
