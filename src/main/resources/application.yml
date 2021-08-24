@@ -6,7 +6,12 @@ logging:
 
 spring:
   profiles: 
-    active: "default"
+    active: "dev"
+
+---
+
+spring:
+  profiles: dev
   datasource:
     driver-class-name: org.postgresql.Driver
     password: pwd
@@ -23,3 +28,24 @@ app:
     secret: jwtsecret
     expiraton-in-ms: 86400000
     internalAccessKey: internalaccesskey
+  
+---
+
+spring:
+  profiles: prod
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: ${DB_PASS}
+    url: ${DB_URL}
+    username: ${DB_USER}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiraton-in-ms: 86400000
+    internalAccessKey: ${INTERNAL_API_KEY}

@@ -18,6 +18,13 @@ repositories {
 	mavenCentral()
 }
 
+/* 
+ * this disables creating plain jar that contains all modules, dependencies as well as its classes and resources
+ */
+jar {
+	enabled = false
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
