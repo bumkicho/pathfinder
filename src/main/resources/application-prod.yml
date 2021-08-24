@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: ${DB_PASS}
+    url: ${DB_URL}
+    username: ${DB_USER}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  config:
+    activate:
+      on-profile: prod
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiraton-in-ms: 86400000
+    internalAccessKey: ${INTERNAL_API_KEY}
