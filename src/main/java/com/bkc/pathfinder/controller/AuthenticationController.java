@@ -33,8 +33,8 @@ public class AuthenticationController {
 	private UserServiceInterface iUserService;
 	
 	//ResponseEntity - response status, response header, response body
-	@PostMapping("signin") //api/authentication/signin
-	public ResponseEntity<User> signIn(@RequestBody User user) {
+	@PostMapping("register") //api/authentication/register
+	public ResponseEntity<User> register(@RequestBody User user) {
 		if (iUserService.findByUserName(user.getUserName())!=null) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}

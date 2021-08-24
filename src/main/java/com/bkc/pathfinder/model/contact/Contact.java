@@ -42,9 +42,9 @@ public class Contact {
 	@Column(name="created_dt")
 	private LocalDateTime createdDt;
 	
-	@OneToMany(mappedBy = "contact")
-	private Set<ContactActivity> contactActivities;
+//	@OneToMany(mappedBy = "contact")
+//	private Set<ContactActivity> contactActivities;
 	
-	@OneToMany(mappedBy = "contact")
-	private Set<ContactAddress> contactAddress;
+//	@OneToMany(mappedBy = "contact")
+//	private Set<ContactAddress> contactAddress;
 }

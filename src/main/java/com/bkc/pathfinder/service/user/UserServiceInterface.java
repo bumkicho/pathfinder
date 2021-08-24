@@ -23,7 +23,10 @@ public interface UserServiceInterface {
 	Role saveRole(Role role);
 
 	User findByUserName(String userName);
-	UserRole saveUserRole(User user, Role role);
+	User findByUserIdAndPassword(String userId, String password);
+	Role findRoleByRoleName(String roleName);
 	List<Role> getRolesByUser(User user);
-
+	
+	UserRole saveUserRole(User user, Role role);
+	List<Role> setRolesForUser(User user, Role role);
 }

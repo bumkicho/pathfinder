@@ -34,9 +34,8 @@ public class ActivityType {
 	@Column(name = "activity_type_id", unique = true, nullable = false, length = 20)
 	private String activityTypeId;
 	
-	//TODO: learn more about FetchType and CascadeType
-	@OneToMany(mappedBy="activityType", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	private Set<Activity> activities;
+//	@OneToMany(mappedBy="activityType", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+//	private Set<Activity> activities;
 	
 	@Column(name = "description", nullable = false, length = 100)
 	private String description;

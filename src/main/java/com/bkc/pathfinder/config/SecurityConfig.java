@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //app will not create session. every request will need to be authenticated. using JWT makes it okay?
 
 		http.authorizeRequests()
-	        .antMatchers("/api/internal/**").hasAnyRole("SYSADMIN")
+	        .antMatchers("/api/internal/**").hasAnyRole("SYSADMIN") // dedicated sysadmin or crm admin users
 	        .antMatchers("/api/crm/**").hasAnyRole("USER, ADMIN")
 	        .antMatchers("/api/authentication/**").permitAll()
 	        .antMatchers("/**").permitAll()

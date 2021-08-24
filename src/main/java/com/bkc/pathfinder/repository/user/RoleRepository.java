@@ -13,5 +13,7 @@ import com.bkc.pathfinder.model.user.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, String> {
+	
+	Role findRoleByRoleName(String roleName);
 
 }

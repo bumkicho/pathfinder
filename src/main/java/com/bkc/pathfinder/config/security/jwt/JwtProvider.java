@@ -45,7 +45,6 @@ public class JwtProvider implements JwtProviderInterface {
 	private Long JWT_EXPIRATION_IN_MS;
 	
 	@Override
-	@SuppressWarnings("deprecation")
 	public String generateToken(PFUserDetails auth) {
 		String authorities = auth.getAuthorities().stream()
 								.map(GrantedAuthority::getAuthority)
@@ -110,13 +109,5 @@ public class JwtProvider implements JwtProviderInterface {
 	private SecurityUtilities getSecurityUtilities() {
 		return new SecurityUtilities(JWT_SECRET);
 	}
-	/*
-	 * public Claims extractClaims(HttpServletRequest request) { String token =
-	 * SecurityUtilities.extractAuthTokenFromRequest(request);
-	 * 
-	 * if (token == null) { return null; }
-	 * 
-	 * return Jwts.parser() .setSigningKey(JWT_SECRET) .parseClaimsJws(token)
-	 * .getBody(); }
-	 */
+
 }

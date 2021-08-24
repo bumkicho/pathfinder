@@ -51,6 +51,7 @@ public class ContactActivityTest {
 	
 	private ContactAddress addContactAddress(Contact contact) {
 		ContactAddress contactAddress = new ContactAddress();
+		contactAddress.setContact(contact);
 		contactAddress.setAddressLine1("8425 Tumbleweed St.");
 		contactAddress.setCity("Portage");
 		contactAddress.setState("MI");

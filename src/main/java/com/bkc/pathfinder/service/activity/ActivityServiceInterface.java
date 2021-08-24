@@ -19,4 +19,8 @@ public interface ActivityServiceInterface {
 
 	Optional<List<Activity>> findActivitiesByType(ActivityType activityType);
 
+	Activity saveActivity(Activity activity);
+
+	ActivityType saveActivityType(ActivityType activityType);
+
 }

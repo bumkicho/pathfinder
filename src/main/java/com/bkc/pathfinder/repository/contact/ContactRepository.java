@@ -13,9 +13,13 @@ import com.bkc.pathfinder.model.contact.Contact;
  *
  */
 
+/*
+ * ContactRepository declares methods to be used in ContactService class
+ */
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Long> {
 	
-	Optional<Contact> findByFirstName(String firstName);
+	Contact findByFirstName(String firstName);
+	Contact findByEmailAddress(String emailAddress);
 
 }

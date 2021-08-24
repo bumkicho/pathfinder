@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 
 import com.bkc.pathfinder.config.AppConfig;
 
@@ -19,6 +20,7 @@ import com.bkc.pathfinder.config.AppConfig;
  * @ComponentScan(basePackages = {"com.bkcdata.pathfinder.repository","com.bkcdata.pathfinder.service"}) 
  */
 @SpringBootApplication // same as @Configuration @EnableAutoConfiguration @ComponentScan
+@PropertySource("classpath:application-${spring.profiles.active:default}.yml")
 public class PathfinderApplication {
 
 	public static void main(String[] args) {

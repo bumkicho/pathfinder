@@ -72,6 +72,7 @@ public class UserService implements UserServiceInterface {
 		return userRepository.findByUserName(userName);
 	}
 	
+	@Override
 	public User findByUserIdAndPassword(String userId, String password) {
 		return userRepository.findByUserIdAndPassword(userId, password);
 	}
@@ -90,6 +91,26 @@ public class UserService implements UserServiceInterface {
 			}
 		}
 		
+		return roles;
+	}
+	
+	@Override
+	public Role findRoleByRoleName(String roleName) {
+		Role role = roleRepository.findRoleByRoleName(roleName);
+		return role;
+	}
+	
+	@Override
+	public List<Role> setRolesForUser(User user, Role role) {
+		List<Role> roles = getRolesByUser(user);
+		if(!roles.contains(role)) {
+			try {
+				saveUserRole(user, role);
+				roles.add(role);
+			} catch (Exception e) {
+				;
+			}
+		}
 		return roles;
 	}
 

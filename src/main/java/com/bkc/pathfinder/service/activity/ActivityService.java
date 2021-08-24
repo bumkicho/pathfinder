@@ -44,10 +44,12 @@ public class ActivityService implements ActivityServiceInterface {
 		//return activityTypeRepository.findActivitiesByType(activityType);
 	}
 
+	@Override
 	public ActivityType saveActivityType(ActivityType activityType) {
 		return activityTypeRepository.save(activityType);
 	}
 
+	@Override
 	public Activity saveActivity(Activity activity) {
 		return activityRepository.save(activity);
 	}

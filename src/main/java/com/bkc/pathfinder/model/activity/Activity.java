@@ -41,11 +41,12 @@ public class Activity {
 	@Column(name = "notes", nullable = false, length = 1000)
 	private String notes;
 	
+	//TODO: learn more about FetchType and CascadeType
 	@ManyToOne(fetch = FetchType.LAZY, optional=false)
 	@JoinColumn(name="activity_type_id", nullable=false)
 	private ActivityType activityType;
 	
-	@OneToMany(mappedBy = "activity")
-	private Set<ContactActivity> contactActivities;
+//	@OneToMany(mappedBy = "activity")
+//	private Set<ContactActivity> contactActivities;
 
 }
