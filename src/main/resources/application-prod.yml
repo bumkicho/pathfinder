@@ -18,3 +18,8 @@ app:
     secret: ${JWT_SECRET}
     expiraton-in-ms: 86400000
     internalAccessKey: ${INTERNAL_API_KEY}
+
+mailgun:
+  api:
+    domain: ${MAILGUN_DOMAIN}
+    key: ${MAILGUN_API_KEY}

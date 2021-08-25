@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.*;
 
@@ -13,9 +14,13 @@ import com.bkc.pathfinder.config.security.PFPasswordEncoder;
 import com.bkc.pathfinder.model.user.Role;
 import com.bkc.pathfinder.model.user.User;
 import com.bkc.pathfinder.model.user.UserRole;
+import com.bkc.pathfinder.model.user.VerificationToken;
+import com.bkc.pathfinder.reddit.model.NotificationEmail;
+import com.bkc.pathfinder.reddit.service.MailService;
 import com.bkc.pathfinder.repository.user.RoleRepository;
 import com.bkc.pathfinder.repository.user.UserRepository;
 import com.bkc.pathfinder.repository.user.UserRoleRepository;
+import com.bkc.pathfinder.repository.user.VerificationTokenRepository;
 
 /**
  * 
@@ -38,18 +43,44 @@ public class UserService implements UserServiceInterface {
 	@Autowired
 	private PFPasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private VerificationTokenRepository tokenRepository;
+	
+	@Autowired
+	private MailService mailService;
+	
 	/*
 	 * SAVE OPERATIONS
 	 */
 	@Override
-	public User saveUser(User user) {
+	public User registerUser(User user) {
 		user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
 		user.setCreatedDt(LocalDateTime.now());
-		user.setActive(true);
+		user.setActive(false);
 		
-		return userRepository.save(user);
+		return generateVerificationToken(userRepository.save(user));
 	}
 	
+	private User generateVerificationToken(User user) {
+
+		String token = UUID.randomUUID().toString();
+		VerificationToken verificationToken = new VerificationToken();
+		verificationToken.setToken(token);
+		verificationToken.setUser(user);
+		
+		tokenRepository.save(verificationToken);
+		
+		mailService.sendMailViaMailGun(new NotificationEmail("Please Activate your account",
+				user.getUserEmail(),
+				"Thank you for signing up to Pathfinder, " +
+				"Please click on the below url to activate your account: " +
+				"http://bkcpathfinder.herokuapp.com/api/authentication/verify/" +
+				token));
+		
+		return user;
+		
+	}
+
 	@Override
 	public Role saveRole(Role role) {
 		return roleRepository.save(role);

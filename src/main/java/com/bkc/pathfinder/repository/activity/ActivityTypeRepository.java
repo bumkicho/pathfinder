@@ -12,5 +12,7 @@ import com.bkc.pathfinder.model.activity.ActivityType;
 public interface ActivityTypeRepository extends JpaRepository<ActivityType, String> {
 
 	Optional<List<ActivityType>> findAllByDescription(String description);
+	
+	Optional<ActivityType> findByTypeCode(String typeCode);
 
 }

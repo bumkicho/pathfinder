@@ -1,8 +1,11 @@
-logging:
-  level:
-    .: error
-    org.springframework: ERROR
-    com.bkc: ERROR
+
+#logging:
+#  level:
+#    org.springframework.web: debug
+#    org.hibernate: error
+#  file:
+#    name: spring-boot-app.log
+
 
 spring:
   profiles: 

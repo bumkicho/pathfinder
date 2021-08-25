@@ -9,6 +9,9 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import com.bkc.pathfinder.model.contact.ContactActivity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
 
@@ -31,7 +34,7 @@ public class Activity {
 	
 	@Column(name = "subject", nullable = false, length = 100)
 	private String subject;
-	
+
 	@Column(name = "scheduled_start_dt")
 	private LocalDateTime scheduledStartDt;
 	
@@ -42,6 +45,7 @@ public class Activity {
 	private String notes;
 	
 	//TODO: learn more about FetchType and CascadeType
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="typeCode")
 	@ManyToOne(fetch = FetchType.LAZY, optional=false)
 	@JoinColumn(name="activity_type_id", nullable=false)
 	private ActivityType activityType;

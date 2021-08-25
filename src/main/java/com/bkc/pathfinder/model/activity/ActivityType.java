@@ -25,19 +25,19 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "activity_type")
+@Table(name="activity_type")
 public class ActivityType {
 	
 	@Id
-	@GeneratedValue(generator = "simple-generator")
-	@GenericGenerator(name = "simple-generator", parameters = @Parameter(name = "prefix", value = "activityType"), strategy = "com.bkc.pathfinder.common.SimpleIDGenerator")
-	@Column(name = "activity_type_id", unique = true, nullable = false, length = 20)
+	@GeneratedValue(generator="simple-generator")
+	@GenericGenerator(name="simple-generator", parameters=@Parameter(name="prefix", value="activityType"), strategy="com.bkc.pathfinder.common.SimpleIDGenerator")
+	@Column(name="activity_type_id", unique=true, nullable=false, length=20)
 	private String activityTypeId;
+
+	@Column(name="type_code", nullable=false, length=20)
+	private String typeCode;
 	
-//	@OneToMany(mappedBy="activityType", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-//	private Set<Activity> activities;
-	
-	@Column(name = "description", nullable = false, length = 100)
+	@Column(name="description", nullable=false, length=100)
 	private String description;
 
 }

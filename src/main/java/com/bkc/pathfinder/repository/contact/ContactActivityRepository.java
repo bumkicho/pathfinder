@@ -21,8 +21,8 @@ import com.bkc.pathfinder.projection.ContactActivityProjection;
 @Repository
 public interface ContactActivityRepository extends JpaRepository<ContactActivity, String> {
 	
-	Optional<List<ContactActivity>> findAllByContact(@Param("contact") Contact contact);
+	List<ContactActivity> findAllByContact(@Param("contact") Contact contact);
 
-	Optional<List<ContactActivity>> findAllByActivity(@Param("activity") Activity activity);
+	List<ContactActivity> findAllByActivity(@Param("activity") Activity activity);
 
 }

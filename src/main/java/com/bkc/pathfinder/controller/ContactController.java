@@ -107,9 +107,7 @@ public class ContactController {
 		contactService.saveAddress(address);
 		
 		return new ResponseEntity<>("update address successfully", HttpStatus.OK);
-	}
-	
-	
+	}	
 	
 	@PostMapping("add") //api/crm/contact/add
 	public ResponseEntity<?> addContact(@RequestBody ObjectNode objectNode) {

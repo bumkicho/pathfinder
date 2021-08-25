@@ -45,7 +45,7 @@ public class UserRoleTest {
 		 * WHEN using spring, do not create a new instance yourself. It creates it outside of Spring context.
 		 * userService = new UserService();
 		 */
-		userService.saveUser(user);
+		userService.registerUser(user);
 		
 		User user2 = new User();
 		user2.setUserPassword("SalesPage01");
@@ -53,7 +53,7 @@ public class UserRoleTest {
 		user2.setUserEmail("bumkicho@yahoo.com");
 		user2.setActive(false);
 		
-		userService.saveUser(user2);
+		userService.registerUser(user2);
 		
 		Role role = new Role();
 		role.setRoleName("ADMIN");

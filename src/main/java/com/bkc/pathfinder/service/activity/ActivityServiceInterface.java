@@ -13,14 +13,16 @@ import com.bkc.pathfinder.model.contact.ContactActivity;
 @Service
 public interface ActivityServiceInterface {
 
-	Optional<List<ContactActivity>> findAllByContact(Contact contact);
+	List<ContactActivity> findAllByContact(Contact contact);
 
-	Optional<List<ContactActivity>> findAllByActivity(Activity activity);
+	List<ContactActivity> findAllByActivity(Activity activity);
 
-	Optional<List<Activity>> findActivitiesByType(ActivityType activityType);
+	List<Activity> findActivitiesByType(ActivityType activityType);
 
 	Activity saveActivity(Activity activity);
 
 	ActivityType saveActivityType(ActivityType activityType);
+
+	Optional<ActivityType> findActivityTypeByTypeCode(String activityTypeCode);
 
 }

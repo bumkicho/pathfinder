@@ -18,3 +18,8 @@ app:
     secret: jwtsecret
     expiraton-in-ms: 86400000
     internalAccessKey: internalaccesskey
+
+mailgun:
+  api:
+    domain: sandbox130d5cbb623e4ed0bb38ef303c11bf59.mailgun.org
+    key: 24576801540933b80795f0c65737fbc8-fb87af35-27aac0fb

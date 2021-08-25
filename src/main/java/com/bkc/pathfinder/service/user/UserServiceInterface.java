@@ -19,7 +19,7 @@ import com.bkc.pathfinder.model.user.UserRole;
 @Service
 public interface UserServiceInterface {
 
-	User saveUser(User user);
+	User registerUser(User user);
 	Role saveRole(Role role);
 
 	User findByUserName(String userName);

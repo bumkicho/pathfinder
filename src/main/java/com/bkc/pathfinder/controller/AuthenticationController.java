@@ -3,6 +3,7 @@ package com.bkc.pathfinder.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +40,14 @@ public class AuthenticationController {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
 		
-		return new ResponseEntity<>(iUserService.saveUser(user), HttpStatus.CREATED);
+		return new ResponseEntity<>(iUserService.registerUser(user), HttpStatus.CREATED);
+	}
+	
+	@PostMapping("verify/{token}")
+	public ResponseEntity<String> verify(@PathVariable String token) {
+		iAuthenticationService.verify(token);
+		
+		return new ResponseEntity<>("verified", HttpStatus.OK);
 	}
 	
 	@PostMapping("login") //api/authentication/login

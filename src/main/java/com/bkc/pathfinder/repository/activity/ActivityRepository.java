@@ -21,8 +21,8 @@ import com.bkc.pathfinder.projection.ActivityProjection;
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity, String> {
 
-	Optional<List<ActivityProjection>> findBySubject(String subject);
+	List<ActivityProjection> findBySubject(String subject);
 
-	Optional<List<Activity>> findAllByActivityType(ActivityType activityType);
+	List<Activity> findAllByActivityType(ActivityType activityType);
 
 }

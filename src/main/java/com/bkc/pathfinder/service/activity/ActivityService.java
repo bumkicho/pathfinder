@@ -29,17 +29,17 @@ public class ActivityService implements ActivityServiceInterface {
 	ActivityRepository activityRepository;
 	
 	@Override
-	public Optional<List<ContactActivity>> findAllByContact(Contact contact) {
+	public List<ContactActivity> findAllByContact(Contact contact) {
 		return contactActivityRepository.findAllByContact(contact);
 	}
 	
 	@Override
-	public Optional<List<ContactActivity>> findAllByActivity(Activity activity) {
+	public List<ContactActivity> findAllByActivity(Activity activity) {
 		return contactActivityRepository.findAllByActivity(activity);
 	}
 	
 	@Override
-	public Optional<List<Activity>> findActivitiesByType(ActivityType activityType) {
+	public List<Activity> findActivitiesByType(ActivityType activityType) {
 		return activityRepository.findAllByActivityType(activityType);
 		//return activityTypeRepository.findActivitiesByType(activityType);
 	}
@@ -52,6 +52,11 @@ public class ActivityService implements ActivityServiceInterface {
 	@Override
 	public Activity saveActivity(Activity activity) {
 		return activityRepository.save(activity);
+	}
+
+	@Override
+	public Optional<ActivityType> findActivityTypeByTypeCode(String typeCode) {
+		return activityTypeRepository.findByTypeCode(typeCode);
 	}
 
 }
