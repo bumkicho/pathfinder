@@ -1,7 +1,6 @@
 package com.bkc.pathfinder.controller;
 
 import java.util.Optional;
-import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +19,6 @@ import com.bkc.pathfinder.model.contact.Contact;
 import com.bkc.pathfinder.model.contact.ContactActivity;
 import com.bkc.pathfinder.service.activity.ActivityServiceInterface;
 import com.bkc.pathfinder.service.contact.ContactServiceInterface;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;

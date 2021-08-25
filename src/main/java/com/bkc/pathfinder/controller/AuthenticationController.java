@@ -36,8 +36,9 @@ public class AuthenticationController {
 	//ResponseEntity - response status, response header, response body
 	@PostMapping("register") //api/authentication/register
 	public ResponseEntity<User> register(@RequestBody User user) {
-		if (iUserService.findByUserName(user.getUserName())!=null) {
-			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		User existingUser = iUserService.findByUserName(user.getUserName());
+		if (existingUser!=null) {
+			return new ResponseEntity<>(existingUser, HttpStatus.CONFLICT);
 		}
 		
 		return new ResponseEntity<>(iUserService.registerUser(user), HttpStatus.CREATED);
