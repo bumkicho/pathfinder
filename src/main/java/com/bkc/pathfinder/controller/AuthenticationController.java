@@ -46,10 +46,8 @@ public class AuthenticationController {
 	}
 	
 	@GetMapping("verify/{token}")
-	public ResponseEntity<String> verify(@PathVariable String token) {
-		iAuthenticationService.verify(token);
-		
-		return new ResponseEntity<>("verified", HttpStatus.OK);
+	public ResponseEntity<String> verify(@PathVariable String token) {		
+		return new ResponseEntity<>(iAuthenticationService.verify(token), HttpStatus.OK);
 	}
 	
 	@PostMapping("login") //api/authentication/login

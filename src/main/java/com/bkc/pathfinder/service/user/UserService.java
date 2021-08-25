@@ -54,7 +54,7 @@ public class UserService implements UserServiceInterface {
 	 */
 	@Override
 	public User registerUser(User user) {
-		user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
+		user.setUserPassword(passwordEncoder.encode(PFPasswordEncoder.DEFAULT_PASSWORD));
 		user.setCreatedDt(LocalDateTime.now());
 		user.setActive(false);
 		
@@ -144,5 +144,5 @@ public class UserService implements UserServiceInterface {
 		}
 		return roles;
 	}
-
+	
 }

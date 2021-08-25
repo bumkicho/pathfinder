@@ -10,4 +10,5 @@ public class PFPasswordEncoder extends BCryptPasswordEncoder {
 		super();
 	}
 
+	public static final String DEFAULT_PASSWORD = "defaultPassword!";
 }

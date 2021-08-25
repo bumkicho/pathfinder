@@ -9,6 +9,6 @@ public interface AuthenticationServiceInterface {
 
 	User signInAndReturnJWT(User requestUser);
 
-	void verify(String token);
+	String verify(String token);
 
 }
