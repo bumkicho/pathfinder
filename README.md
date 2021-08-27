@@ -1,5 +1,11 @@
 # Spring Boot Pathfinder
 
+### About
+
+	Pathfinder is a community site where people who are looking to change their career paths can come share their journeys.
+	This is backend, work in progress, developed with Java, Spring Boot, JPA, JWT, PostgreSQL.
+	Frontend will be developed with Angular. Hosted in Heroku with email service for registration.
+
 ### Endpoints
 
 #### Register
