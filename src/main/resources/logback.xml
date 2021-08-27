@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
+
 <configuration>
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
@@ -11,7 +11,7 @@
         <appender-ref ref="consoleAppender"/>
     </root>
 </configuration>
--->
+<!--
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <logger name="org.springframework.web" level="DEBUG"/>
@@ -22,3 +22,4 @@
 		<appender-ref ref="FILE" />
 	</root>
 </configuration>
+-->
