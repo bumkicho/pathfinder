@@ -23,3 +23,4 @@ mailgun:
   api:
     domain: ${MAILGUN_DOMAIN}
     key: ${MAILGUN_API_KEY}
+    sender: ${ADMIN_EMAIL}

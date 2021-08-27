@@ -22,16 +22,17 @@ public class MailService {
 	@Autowired
 	private MailGunConfig mailGunConfig;
 	
-	public JsonNode sendMailViaMailGun(NotificationEmail notificationEmail) {
+	private final String mailGunDomain = this.mailGunConfig.getMailGunDomain();
+	private final String mailGunApiKey = this.mailGunConfig.getMailGunApiKey();
+	private final String mailSender = this.mailGunConfig.getAdminSenderAddress();
 	
-		String mailGunDomain = this.mailGunConfig.getMailGunDomain();
-		String mailGunApiKey = this.mailGunConfig.getMailGunApiKey();
+	public JsonNode sendMailViaMailGun(NotificationEmail notificationEmail) {		
 
 		HttpResponse<JsonNode> request;
 		try {
 			request = Unirest.post("https://api.mailgun.net/v3/"+mailGunDomain+"/messages")
 					.basicAuth("api", mailGunApiKey)
-					.field("from", "bumkicho@gmail.com").field("to", notificationEmail.getRecipient())
+					.field("from", mailSender).field("to", notificationEmail.getRecipient())
 					.field("subject", notificationEmail.getSubject())
 					.field("text", mailContentBuilder.build(notificationEmail.getBody()))
 					.asJson();
@@ -43,15 +44,12 @@ public class MailService {
 	}
 	
 	public JsonNode sendTestMailViaMailGun() {
-		
-		String mailGunDomain = this.mailGunConfig.getMailGunDomain();
-		String mailGunApiKey = this.mailGunConfig.getMailGunApiKey();
 
 		HttpResponse<JsonNode> request;
 		try {
 			request = Unirest.post("https://api.mailgun.net/v3/"+mailGunDomain+"/messages")
 					.basicAuth("api", mailGunApiKey)
-					.field("from", "bumkicho@gmail.com").field("to", "bumkicho@gmail.com")
+					.field("from", mailSender).field("to", "bumkicho@gmail.com")
 					.field("subject", "hello").field("text", "this is a test email").asJson();
 			return request.getBody();
 		} catch (UnirestException e) {

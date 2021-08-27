@@ -14,5 +14,8 @@ public class MailGunConfig {
 	
 	@Value("${mailgun.api.key}")
 	private String mailGunApiKey;
+	
+	@Value("${mailgun.api.sender}")
+	private String adminSenderAddress;
 
 }
