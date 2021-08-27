@@ -2,9 +2,9 @@
 
 ### Endpoints
 
-#### Sign in
+#### Register
 
-	POST /api/authentication/signin HTTP/1.1
+	POST /api/authentication/register HTTP/1.1
 	Host: localhost:8080
 	Content-Type: application/json
 
@@ -25,6 +25,11 @@
 		"userPassword":"password"
 	}
 
+#### Verification
+
+	GET /api/authentication/verify/... HTTP/1.1
+	Host: localhost:8080
+
 #### Update user
 
 	PUT /api/internal/updateuser HTTP/1.1
@@ -38,7 +43,20 @@
 		"status": "Active"
 	}
 
-#### add contact
+#### Add role
+
+	POST /api/internal/addrole HTTP/1.1
+	Host: localhost:8080
+	Authorization: Bearer ...
+	Content-Type: application/json
+	Content-Length: 70
+
+	{
+		"roleName":"role",
+		"description": "role description"
+	}
+
+#### add contact(s) and address(s)
 
 POST /api/crm/contact/add HTTP/1.1
 Host: localhost:8080
@@ -66,7 +84,7 @@ Content-Type: application/json
 
 	PUT /api/crm/contact/updateaddress HTTP/1.1
 	Host: localhost:8080
-	Authorization: Bearer ....
+	Authorization: Bearer ...
 	Content-Type: application/json
 
 	{
@@ -84,3 +102,99 @@ Content-Type: application/json
 	GET /api/crm/contact HTTP/1.1
 	Host: localhost:8080
 	Authorization: Bearer ...
+
+#### add activity type
+
+	POST /api/crm/activity/addtype HTTP/1.1
+	Host: localhost:8080
+	Authorization: Bearer ...
+	Content-Type: application/json
+	Content-Length: 63
+
+	{
+		"typeCode":"type",
+		"description":"type description"
+	}
+
+#### add activity(s)
+
+	POST /api/crm/activity/add HTTP/1.1
+	Host: localhost:8080
+	Authorization: Bearer ...
+	Content-Type: application/json
+
+	{
+		"elementcount":2,
+		"elements":[
+			{
+				"emailAddress":"testuser@email.com",
+				"activity":[
+					{
+					"subject":"subject",
+					"notes":"notes",
+					"scheduledStartDt":"yyyy-MM-ddTHH:mm:ss.SSS",
+					"scheduledEndDt":"yyyy-MM-dd'T'HH:mm:ss.SSS",
+					"activityType":"type"
+					}
+				]
+			}
+		]
+	}
+
+#### add subreddit
+
+	POST /api/reddit/subreddit HTTP/1.1
+	Host: localhost:8080
+	Authorization: Bearer ...
+	Content-Type: application/json
+	Content-Length: 64
+
+	{
+		"name":"test 1",
+		"description":"test subreddit 1"
+	}
+
+#### add post
+
+	POST /api/reddit/post HTTP/1.1
+	Host: localhost:8080
+	Authorization: Bearer ...
+	Content-Type: application/json
+
+	{
+		"elementcount":2,
+		"elements":[
+			{
+				"subredditid":1,
+				"posts":[
+					{
+					"postName":"post1",
+					"description":"post1 description"
+					},
+					{
+					"postName":"post2",
+					"description":"post2 description"
+					}
+				]
+			}
+		]
+	}
+
+#### get post by id
+
+	GET /api/reddit/post/1 HTTP/1.1
+	Host: localhost:8080
+	Authorization: Bearer ...
+
+#### get all subreddit
+
+	GET /api/reddit/subreddit HTTP/1.1
+	Host: localhost:8080
+	Authorization: Bearer ...
+
+#### get subreddit by id
+
+	GET /api/reddit/subreddit/3 HTTP/1.1
+	Host: localhost:8080
+	Authorization: Bearer ...
+

@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
  *
  */
 
+/*
+ * This is used in ActiivityRepository
+ */
 public interface ActivityProjection {
 	//TODO: Create a projection that include contact activity fields
 	String getSubject();

@@ -62,11 +62,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        .antMatchers("/api/internal/**").hasAnyRole("SYSADMIN") // dedicated sysadmin or crm admin users
 	        .antMatchers("/api/crm/**").hasAnyRole("USER, ADMIN")
 	        .antMatchers("/api/authentication/**").permitAll()
+	        .antMatchers(HttpMethod.GET, "/api/reddit/**").permitAll()
 	        .antMatchers("/**").permitAll()
 	        .anyRequest().authenticated();
-
-//		http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN").antMatchers("/user").hasAnyRole("ADMIN", "USER")
-//				.antMatchers("/").permitAll().and().formLogin();
 		
 		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
 			.addFilterBefore(internalAuthenticationFilter(), JwtAuthenticationFilter.class);

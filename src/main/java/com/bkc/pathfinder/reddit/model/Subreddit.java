@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import com.bkc.pathfinder.model.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.Instant;
 import java.util.List;
@@ -32,11 +33,13 @@ public class Subreddit {
     @NotBlank(message = "Description is required")
     private String description;
     
-    @OneToMany(fetch = LAZY)
+    @OneToMany
     private List<Post> posts;
     
     private Instant createdDate;
     
-    @ManyToOne(fetch = LAZY)
+//    @ManyToOne(fetch = LAZY)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne
     private User user;
 }

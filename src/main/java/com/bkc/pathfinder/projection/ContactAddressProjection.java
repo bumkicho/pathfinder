@@ -1,7 +1,14 @@
 package com.bkc.pathfinder.projection;
 
-import java.time.LocalDateTime;
+/**
+ * 
+ * @author bumki
+ *
+ */
 
+/*
+ * This projection is used with @Query in ContactAddressRepository
+ */
 public interface ContactAddressProjection {
 	
 	//TODO: Create a projection that include contact activity fields
