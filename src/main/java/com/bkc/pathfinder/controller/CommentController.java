@@ -41,12 +41,12 @@ import lombok.AllArgsConstructor;
  */
 
 @RestController
-@RequestMapping("api/reddit/comments/")
+@RequestMapping("api/reddit/comment")
 @AllArgsConstructor
 public class CommentController {
 	
 	@Autowired
-	CommentServiceInterface commentsService;
+	CommentServiceInterface commentService;
 	
 	@Autowired
 	UserRepository userRepository;
@@ -75,9 +75,11 @@ public class CommentController {
 					Comment comment = mapper.convertValue(commentNode, Comment.class);
 					comment.setUser(user);
 					comment.setPost(post.get());
-					comments.add(commentsService.saveComment(comment));
+					comments.add(commentService.saveComment(comment));
 				});
 			});
+			
+			commentService.sendNotificationToPostOwner(comments);
 
 			return new ResponseEntity<List<Comment>>(comments, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -85,10 +87,22 @@ public class CommentController {
 		}
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/post/{id}")
 	public ResponseEntity<List<Comment>> getCommentsByPostId(@PathVariable Long postId) {
-		List<Comment> comments = commentsService.getCommentsByPostId(postId);
+		List<Comment> comments = commentService.getCommentsByPostId(postId);
 		return new ResponseEntity<List<Comment>> (comments, HttpStatus.OK);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Comment> getCommentById(@PathVariable Long id) {
+		Comment comment = commentService.getCommentById(id);
+		return new ResponseEntity<Comment> (comment, HttpStatus.OK);
+	}
+	
+	@GetMapping("/user/{username}")
+	public ResponseEntity<List<Comment>> getCommentsByUser(@PathVariable String username) {
+		List<Comment> comments = commentService.getCommentsByUserName(username);
+		return new ResponseEntity<List<Comment>>(comments, HttpStatus.OK);
 	}
 
 }

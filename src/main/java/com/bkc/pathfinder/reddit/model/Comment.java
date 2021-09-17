@@ -26,13 +26,13 @@ public class Comment {
     @NotEmpty
     private String text;
     
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne
     @JoinColumn(name = "postId")
     Post post;
     
     private Instant createdDate;
     
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne
     @JoinColumn(name = "userId")
     User user;
 }

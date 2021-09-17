@@ -21,7 +21,7 @@ public class SendTestEmail {
 	
 	@Test
 	public void testEmail() {
-		JsonNode node = mailService.sendTestMailViaMailGun();
-		System.out.println(node.toString());
+//		JsonNode node = mailService.sendTestMailViaMailGun();
+//		System.out.println(node.toString());
 	}
 }

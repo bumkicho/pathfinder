@@ -10,4 +10,10 @@ public interface CommentServiceInterface {
 
 	List<Comment> getCommentsByPostId(Long postId);
 
+	Comment getCommentById(Long commentId);
+
+	void sendNotificationToPostOwner(List<Comment> comments);
+
+	List<Comment> getCommentsByUserName(String username);
+
 }
