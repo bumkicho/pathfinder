@@ -21,6 +21,6 @@ app:
 
 mailgun:
   api:
-    domain: sandboxaf701e6bbfba49e69a208f3aca952a0a.mailgun.org
-    key: df2ed4c99f5f97120b528a958fc288b9-fb87af35-7520924f
-    sender: bumkicho@gmail.com
+    domain:
+    key:
+    sender:
